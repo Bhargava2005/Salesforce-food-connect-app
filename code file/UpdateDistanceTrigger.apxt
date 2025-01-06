@@ -1,0 +1,11 @@
+trigger UpdateDistanceTrigger on Drop_Off_Point__c (before insert, before update) {
+    for (Drop_Off_Point__c obj : Trigger.new) {
+        try {
+            // Assign the value from the formula field to the number variable field
+            obj.Distance_Value__c = obj.distance_calculation__c;
+        } catch (Exception e) {
+            // Handle any exceptions if needed
+            System.debug('Error in trigger: ' + e.getMessage());
+        }
+    }
+}
